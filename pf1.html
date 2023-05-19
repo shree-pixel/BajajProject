@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Developer List</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Search form styles */
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button[type="button"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Developer list styles */
+        #developerList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        li {
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            transition: box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        li:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin: 0;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            font-size: 18px;
+            text-align: center;
+            width: 100%;
+        }
+
+        p {
+            margin: 10px;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Developer List</h1>
+
+    <form>
+        <input type="text" id="searchInput" placeholder="Search by name">
+        <button type="button" onclick="searchByName()">Search</button>
+    </form>
+
+    <ul id="developerList"></ul>
+
+    <script>
+        // Fetch JSON data from the provided source
+        fetch('https://raw.githubusercontent.com/dixitsoham7/dixitsoham7.github.io/main/index.json')
+            .then(response => response.json())
+            .then(data => {
+                renderDeveloperList(data);
+            })
+            .catch(error => {
+                console.error('Error fetching JSON data:', error);
+            });
+
+        function renderDeveloperList(developers) {
+            const developerList = document.getElementById('developerList');
+
+            // Clear existing content
+            developerList.innerHTML = '';
+
+            if (developers.length === 0) {
+                developerList.innerHTML = '<p>No developers found.</p>';
+            } else {
+                developers.forEach(developer => {
+                    const li = document.createElement('li');
+                    const h3 = document.createElement('h3');
+                    const designation = document.createElement('p');
+                    const skills = document.createElement('
